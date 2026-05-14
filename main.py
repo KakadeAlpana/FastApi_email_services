@@ -25,9 +25,10 @@ def home():
 
 @app.post("/submit")
 def submit_form(
-    name: str = Form(...),
-    phone: str = Form(...),
+    first: str = Form(...),
+    last: str = Form(...),
     email: str = Form(...),
+    phone: str = Form(...),
     message: str = Form(...),
     source: str = Form(...) 
 ):
@@ -38,47 +39,16 @@ def submit_form(
             
             "reply_to": email,
             "subject": "Test Contact Form",
-            "html": f"""
-    <h2>New Contact Form Submission</h2>
+           "html": f"""
+<h3>New Contact Form</h3>
 
-    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%; font-family: Arial;">
-        
-        <tr>
-            <th align="left">Field</th>
-            <th align="left">Value</th>
-        </tr>
-
-        <tr>
-            <td><b>Source</b></td>
-            <td>{source}</td>
-        </tr>
-
-        <tr>
-            <td><b>Name</b></td>
-            <td>{name}</td>
-        </tr>
-
-        <tr>
-            <td><b>Phone</b></td>
-            <td>{phone}</td>
-        </tr>
-
-        <tr>
-            <td><b>Email</b></td>
-            <td>{email}</td>
-        </tr>
-
-        <tr>
-            <td><b>Message</b></td>
-            <td>{message}</td>
-        </tr>
-
-    </table>
-
-    <br>
-    <p style="color: gray; font-size: 12px;">
-        This email was sent from your website contact form.
-    </p>
+<table border="1" cellpadding="8" style="border-collapse: collapse;">
+<tr><td><b>Source</b></td><td>{source}</td></tr>
+<tr><td><b>Name</b></td><td>{first} {last}</td></tr>
+<tr><td><b>Email</b></td><td>{email}</td></tr>
+<tr><td><b>Phone</b></td><td>{phone}</td></tr>
+<tr><td><b>Message</b></td><td>{message}</td></tr>
+</table>
 """
         })
 
